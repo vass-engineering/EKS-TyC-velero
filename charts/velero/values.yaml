@@ -190,48 +190,48 @@ configuration:
   backupStorageLocation:
     # name is the name of the backup storage location where backups should be stored. If a name is not provided,
     # a backup storage location will be created with the name "default". Optional.
-    name:
+    name: default
     # provider is the name for the backup storage location provider. If omitted
     # `configuration.provider` will be used instead.
     provider:
     # bucket is the name of the bucket to store backups in. Required.
-    bucket:
+    bucket: backupeks
     # caCert defines a base64 encoded CA bundle to use when verifying TLS connections to the provider. Optional.
     caCert:
     # prefix is the directory under which all Velero data should be stored within the bucket. Optional.
     prefix:
     # default indicates this location is the default backup storage location. Optional.
-    default:
+    default: true
     # accessMode determines if velero can write to this backup storage location. Optional.
     # default to ReadWrite, ReadOnly is used during migrations and restores.
     accessMode: ReadWrite
     # Additional provider-specific configuration. See link above
     # for details of required/optional fields for your provider.
-    config: {}
-    #  region:
-    #  s3ForcePathStyle:
-    #  s3Url:
+    config: 
+      region: minio
+      s3ForcePathStyle: "true"
+      s3Url: http://eks-tyc-minio.eks-tyc-minio.svc.cluster.local:9000
     #  kmsKeyId:
     #  resourceGroup:
     #  The ID of the subscription containing the storage account, if different from the cluster’s subscription. (Azure only)
     #  subscriptionId:
     #  storageAccount:
-    #  publicUrl:
+      publicUrl: minio.tyc-1-22.108.128.15.214.nip.io
     #  Name of the GCP service account to use for this backup storage location. Specify the
     #  service account here if you want to use workload identity instead of providing the key file.(GCP only)
     #  serviceAccount:
 
   # Parameters for the `default` VolumeSnapshotLocation. See
   # https://velero.io/docs/v1.6/api-types/volumesnapshotlocation/
-  volumeSnapshotLocation:
+  #volumeSnapshotLocation:
     # name is the name of the volume snapshot location where snapshots are being taken. Required.
-    name:
+    #name:
     # provider is the name for the volume snapshot provider. If omitted
     # `configuration.provider` will be used instead.
-    provider:
+    #provider:
     # Additional provider-specific configuration. See link above
     # for details of required/optional fields for your provider.
-    config: {}
+    #config: {}
   #    region:
   #    apiTimeout:
   #    resourceGroup:
@@ -276,7 +276,7 @@ configuration:
   logFormat:
 
   # Set true for backup all pod volumes without having to apply annotation on the pod when used restic Default: false. Other option: false.
-  defaultVolumesToRestic:
+  defaultVolumesToRestic: 
 
   # How often 'restic prune' is run for restic repositories by default. Default: 168h. Optional.
   defaultResticPruneFrequency:
@@ -342,7 +342,7 @@ credentials:
 # Whether to create backupstoragelocation crd, if false => do not create a default backup location
 backupsEnabled: true
 # Whether to create volumesnapshotlocation crd, if false => disable snapshot feature
-snapshotsEnabled: true
+snapshotsEnabled: false
 
 # Whether to deploy the restic daemonset.
 deployRestic: true
