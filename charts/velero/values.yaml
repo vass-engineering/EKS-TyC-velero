@@ -10,7 +10,7 @@ image:
   # Digest value example: sha256:d238835e151cec91c6a811fe3a89a66d3231d9f64d09e5f3c49552672d271f38.
   # If used, it will take precedence over the image.tag.
   # digest:
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # One or more secrets to be used when pulling images
   imagePullSecrets: []
   # - registrySecretName
@@ -199,7 +199,7 @@ configuration:
     # caCert defines a base64 encoded CA bundle to use when verifying TLS connections to the provider. Optional.
     caCert:
     # prefix is the directory under which all Velero data should be stored within the bucket. Optional.
-    prefix:
+    prefix: eks-tyc-1-22
     # default indicates this location is the default backup storage location. Optional.
     default: true
     # accessMode determines if velero can write to this backup storage location. Optional.
